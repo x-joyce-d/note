@@ -58,10 +58,7 @@ ECMAScript 3 语法
   var num = true
   alert(typeof num)
 ```
-* 闭包
-  * 允许将数据与一个或多个方法关联起来（eg:点击事件）
-  * 函数作为返回值
-  * 函数作为参数传递
+* [闭包](./bibao.md)
 * 原型、继承
 * 作用域
 * 单线程
