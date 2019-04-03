@@ -63,7 +63,6 @@ ECMAScript 3 语法
 ```
 * [闭包](./ECMAScript3/bibao.md)
 * [原型、继承](./ECMAScript3/protoType.md)
-  -
 * [作用域](./ECMAScript3/scope.md)
 * `单线程`
 ```js
