@@ -17,6 +17,8 @@ Undefined
 void与undefined
 ---
 void运算符，对任何值都返回undefined
+
 * javascript:void(0)
-* APPID
-5c9dd782
+```js
+  <form action="javascript:void(0)"></form> // 不执行任何操作
+```

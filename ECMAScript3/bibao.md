@@ -13,6 +13,7 @@
 ---
 * 函数作为返回值
 * 函数作为参数传递
+* 嵌套函数
 
 影响
 ---
@@ -33,9 +34,9 @@
   		getName
   	}
   })(window);
-
   console.log( myModule.name ); // echo
   console.log( myModule.getName() ); // echo
 ```
 * 延时器
+  -
 * 监听器
