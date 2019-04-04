@@ -30,8 +30,8 @@ ECMAScript 3 语法
 * `String` - "1ada"
 * `Symbol` - 唯一且不可变
 ```
-  数据类型转换：
-    字符串转数字：parseInt() parseFloat()
+  <!-- 数据类型转换： -->
+    <!-- 字符串转数字：parseInt() parseFloat() -->
 ```
 ```js
   // 使用字符串方法不会改变一个字符串

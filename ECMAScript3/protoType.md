@@ -32,9 +32,9 @@
 ```
 * 是...
   实现继承的主要方法
-  利用原型让引用类型继承另一个引用类型的属性和方法
+  是利用原型让引用类型继承另一个引用类型的属性和方法
 * instanceof运算符
-  * 用来检测 constructor.prototype 是否存在于参数 object 的原型链
+  用来检测 constructor.prototype 是否存在于参数 object 的原型链
 
 继承
 ---
