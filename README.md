@@ -37,7 +37,7 @@ ECMAScript 3 语法
   //输出 "hello world"
 ```
 ```js
-  // 输出符号的`utf-8`形式，并在每个字节前加上`%`
+  // 输出符号并在每个字节前加上`%`
   var test1="http://www.haorooms.com/My first/";
   var nn=encodeURI(test1);
   var now=decodeURI(test1);
@@ -101,13 +101,13 @@ ECMAScript 3 语法
 
 ### 解析函数
 * eval("()") - 常用于将服务器端返回的json字符串解析为json对象
-  - 参数
-    - 只接受原始字符串作为参数，且只接受一个参数；
-    - 若字符串表示的是表达式，则进行求值，返回最后一个表达式的值；
-    - 若定义了一个或多个值，则返回最后一个值；
-  - 注意
-    - 在JavaScript中json对象会被当成语句块执行，须用（）括起来；
-    - 总是在调用它的上下文作用域内执行。
+  * 参数
+    * 只接受原始字符串作为参数，且只接受一个参数；
+    * 若字符串表示为表达式，则进行求值；
+    * 若定义了一个或多个值，则返回最后一个值；
+  * 注意
+    * 在JavaScript中json对象会被当成语句块执行，须用（）括起来；
+    * 总是在调用它的上下文作用域内执行。
 
 ```js
   //1
@@ -131,6 +131,9 @@ ECMAScript 3 语法
   console.log(f(),x);            //输出 “local changed global”
   console.log(g(),y);            //改变了全局变量，输出“local global changed”
 ```
+### 扩展
+* [编码](https://blog.csdn.net/lvxiangan/article/details/8151670)
+<!-- 详见[此](https://blog.csdn.net/iefreer/article/details/4836844) -->
 
 原生类型
 ---
