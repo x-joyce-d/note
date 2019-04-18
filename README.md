@@ -4,12 +4,14 @@ ECMAScript 3 语法
 全局函数
 ---
 ### 编码函数
+避免服务器收到不可预知的请求
 
 | \  | escape() | encodeURI() | encodeURIComponent() |
 |-------|:---:|-----------|---------------------------------|
 | 是什么  | 编码字符串（不提倡） | 编码整个URI | 编码整个URI中的参数 |
 | 可转义字符  | 多为汉字 | 除却ASCII，数字，保留字符之外的所有字符 |保留字符（; / ? : @ & = + $ , #）|
 | 不同点  | 与URI无关 | 编码范围小 | 编码范围更大（可编码特殊字符） |
+| 使用场景  | 读取某个字符串时  | 浏览器发出http请求(1.url中的字符解析不了,2.HTTP Header编码,);JavaScript生成http请求(ajax调用，各个操作系统或浏览器默认编码不一)  | 任何用户输入的可作为url的部分的内容 |
 
 * escape(str) - 对字符串进行编码
 * encodeURI() - 可把字符串作为URI进行编码
@@ -18,38 +20,56 @@ ECMAScript 3 语法
 1. encodeURI()与decodeURI()，假定URI中的任何保留字符都有特殊意义，所以不会进行编码
 1. encodeURIComponent()decodeURIComponent()，假定URI中的任何保留字符都看作是普通文本，所以必须进行编码
 
+application/x-www-form-urlencoded，为form的enctype属性的编码方式 ，把数据编码成用'&'等分割的键值对，并拼接到url后，encodeURIComponent() 处理的是任何用户输入的可作为url的部分的内容
+
 ### 解码函数（与编码函数相对）
 * unescape() - 对字符串进行解码
 * decodeURI() - 解码某个编码的URI
 * decodeURIComponent() - 解码一个编码的URI组件
 ```js
   // javascript 的输入和输出默认都为`Unicode`字符
-  javascript:escape("春节");
-  //输出 "%u6625%u8282"
-  javascript:escape("hello world");
-  //输出 "hello%20word"
-  javascript:escape("\u6625\u8282");
-  //输出 "%u6625%u8282"
+  import express from 'express'
+  import fetch from 'node-fetch'
+  const app = express()
+  app.use((req, res, next) => {
+    console.log(unescape(req.query.name))
+    res.json(req.query)
+  })
 
-  javascript:unescape("%u6625%u8282");
-  //输出 "春节"
-  javascript:unescape("hello%20word");
-  //输出 "hello world"
+  app.listen(3000, () => {
+    const query = [
+      'id=1',
+      'name='+ escape('系统'),
+      'url='+ encodeURI('git+http://abc.com/home?token=asdflksenlke&status=1'),//url注入
+      'url1='+ escape('git+http://abc.com/home?token=asdflksenlke&status=1'),
+      'url2='+ encodeURIComponent('git+http://abc.com/home?token=asdflksenlke&status=1'),
+    ].join('&')
+    fetch('http://localhost:3000/?'+ query)
+      .then(res => res.text())
+      .then(console.log, console.error)
+
+  })
+  // http://192.168.1.104:7000/demo/%E7%9A%84/editor.html
+  const url = 'http://192.168.1.104:7000/demo/的/editor.html'
+  console.log(encodeURI(url))
+  // console.log(encodeURIComponent(url))
+  console.log(`http://192.168.1.104:7000/demo/${encodeURIComponent('的')}/editor.html`)
+
 ```
 ```js
   // 输出符号并在每个字节前加上`%`
   var test1="http://www.haorooms.com/My first/";
   var nn=encodeURI(test1);
   var now=decodeURI(test1);
-  javascript:encodeURI("春节")
   // 输出http://www.haorooms.com/My%20first/
   // 输出http://www.haorooms.com/My first/
-  //输出 %E6%98%A5%E8%8A%82
-  var test1="http://www.haorooms.com/My first/";
-  var bb=encodeURIComponent(test1);
-  var nnow=decodeURIComponent(bb);
-  //输出 http%3A%2F%2Fwww.haorooms.com%2FMy%20first%2F
-  //输出 http://www.haorooms.com/My first/
+  var uri="http://www.baidu.com/my test.asp?name=joyce&age=18&country=comet";
+  var encodeUri=encodeURIComponent(uri);
+  document.write(encodeUri);
+  var decodeURL=decodeURIComponent(encodeUri);
+  document.write(decodeURL)
+
+  //输出 http%3A%2F%2Fwww.baidu.com%2Fmy%20test.asp%3Fname%3Djoyce%26age%3D18%26country%3Dcomet
 ```
 
 ### 转换为数值
