@@ -53,3 +53,8 @@
 默认顶端原型
 ---
 * Object (protoType的`__proto__`指向的是null)
+
+总结
+---
+* 对象.__proto__ = 构造函数.prototype
+* 对象.constructor 返回值是 对象.构造函数
